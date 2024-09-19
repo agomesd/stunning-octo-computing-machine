@@ -4,21 +4,35 @@ import { CricketEvent } from "@virtuallysports/vs-utils";
 
 export default function GamesPage() {
   // TODO: Fetch data from the API
-  // TODO: parse and sort data
-  const data: CricketEvent[] = [];
+  const data: Record<string, CricketEvent[]> = {};
+  // TODO: Create groupByDate function, sort and map to EventGroup cmp
 
   return (
     <div className="p-4">
       <h1>Games Route</h1>
+      <ul>{/* map data to EventGroup */}</ul>
+    </div>
+  );
+}
+
+interface EventGroupProps {
+  date: string;
+  cricketEvents: CricketEvent[];
+}
+
+function EventGroup({ date, cricketEvents }: EventGroupProps) {
+  return (
+    <li>
+      <span>{date}</span>
       <ul>
-        {data.map((d) => (
-          <li key={d.id}>
-            <span>{d.id}</span>
-            <span>{d.startTime}</span>
-            <span>{d.results}</span>
+        {cricketEvents.map((ce) => (
+          <li key={ce.id}>
+            <span>{ce.id}</span>
+            <span>{ce.startTime}</span>
+            <span>{ce.status}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </li>
   );
 }
